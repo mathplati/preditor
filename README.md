@@ -1,166 +1,149 @@
-Previsão de Internações - Hospital Sabará
+# Previsão de Internações Respiratórias – Hospital Sabará
 
-Este projeto foi desenvolvido para prever o número de internações no Hospital Sabará com base nas condições climáticas (temperatura e umidade) da cidade de São Paulo. O código utiliza dados da previsão do tempo da API OpenWeatherMap para gerar uma previsão de internações respiratórias e classificar essas internações por doenças, como bronquiolite, gripe, rinovírus, etc.
+> Este é um sistema simples, feito para rodar no terminal, que ajuda a prever quantas crianças podem ser internadas por doenças respiratórias com base na previsão do tempo dos próximos dias. Ele também permite cadastrar pacientes.
 
-Funcionalidades
+---
 
-Previsão de Internações: O código gera uma previsão do número de internações para os próximos 5 dias.
+## ✨ Funcionalidades (Menu)
 
-Classificação das Internações: As internações são classificadas por doenças respiratórias, como bronquiolite, gripe, rinovírus, entre outras.
+| Opção                                     | O que faz                                                                                           |
+| ----------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| **1 – Ver previsão geral**                | Mostra a previsão do tempo e a quantidade estimada de internações para os próximos 5 dias.          |
+| **2 – Ver previsão de um dia específico** | Permite escolher um dia e ver a previsão de internações para esse dia.                              |
+| **3 – Cadastrar novo histórico**          | Permite digitar quantas internações aconteceram nos últimos dias, para o sistema aprender com isso. |
+| **4 – Cadastrar paciente**                | Salva os dados (nome, CPF e telefone) de um paciente em um arquivo.                                 |
+| **5 – Listar pacientes**                  | Mostra todos os pacientes cadastrados até agora.                                                    |
+| **6 – Sair**                              | Fecha o programa.                                                                                   |
 
-Análise Climática: O sistema analisa as condições climáticas (temperatura e umidade) para prever os riscos e padrões de internações.
+---
 
-Relatório Detalhado: O relatório inclui o resumo climático, o número médio de internações e uma classificação detalhada por doença.
+## 🗂️ Arquivos do Projeto
 
+```
+previsao-internacoes/
+├── main.py                # Código principal
+├── historico.txt          # Internações informadas pelo usuário
+├── usuarios.json          # Lista de pacientes cadastrados
+├── previsao_output.json   # Relatório com previsão gerada
+└── README.md              # Instruções e explicações
+```
 
-Requisitos
-Python 3.x
+---
 
-Biblioteca requests para obter os dados da API do OpenWeatherMap.
+## ⚙️ O que você precisa para rodar
 
-Biblioteca colorama para melhorar a exibição no terminal.
+1. **Python 3.8 ou mais recente**
+2. Uma conta gratuita no site [OpenWeatherMap](https://home.openweathermap.org/users/sign_up)
 
-Como Usar
-1. Instale as Dependências
-Este código requer o Python 3.x. Você pode instalar as dependências necessárias executando o seguinte comando no terminal:
+   * Após se cadastrar, você receberá uma "API Key", que é como uma senha para acessar a previsão do tempo.
 
-bash
-Copiar
-Editar
+### Bibliotecas Python usadas
+
+* `requests` → para acessar a previsão do tempo
+* `colorama` → para deixar o menu colorido no terminal
+
+---
+
+## 🛠️ Como instalar e rodar o sistema
+
+### 1. Baixe os arquivos do projeto
+
+Você pode clicar em “Baixar ZIP” aqui no GitHub, ou usar o comando abaixo se souber usar o Git:
+
+```bash
+git clone <url-do-projeto>
+cd previsao-internacoes
+```
+
+### 2. Instale as bibliotecas necessárias
+
+Abra o terminal ou prompt de comando e digite:
+
+```bash
 pip install requests colorama
-2. Obtenha sua Chave de API do OpenWeatherMap
-Você precisará de uma chave de API para acessar a previsão do tempo. Obtenha sua chave gratuita em OpenWeatherMap.
+```
 
-Depois de obter sua chave, substitua a variável API_KEY no código com a sua chave pessoal:
+### 3. Configure a chave da previsão do tempo
 
-python
-Copiar
-Editar
-API_KEY = "sua-chave-de-api"
-3. Configuração da Cidade
-O código está configurado para obter a previsão do tempo para a cidade de São Paulo. Se você deseja alterar a cidade, basta modificar a variável CITY no código para o nome da cidade e o código do país que você deseja:
+Você pode colar sua chave no código `main.py`, assim:
 
-python
-Copiar
-Editar
-CITY = "São Paulo,br"
-O formato da cidade deve ser "nome_da_cidade,código_do_país", onde o código do país é a abreviação de duas letras (por exemplo, "br" para Brasil, "us" para Estados Unidos, etc.).
+```python
+API_KEY = "SUA_CHAVE_AQUI"
+```
 
-4. Executando o Script
-Para executar o código, basta rodar o script Python no terminal:
+Ou, se souber usar, pode configurar como variável de ambiente:
 
-bash
-Copiar
-Editar
-python previsao_internacoes.py
-5. Relatório Gerado
-Após executar o script, ele gerará um relatório com as previsões de internações para os próximos 5 dias. O relatório será exibido no terminal e também será salvo em um arquivo previsao_output.json no diretório onde o script foi executado.
+```bash
+export OWM_KEY="SUA_CHAVE_AQUI"
+```
 
-O relatório conterá as seguintes informações:
+---
 
-Resumo Climático: Clima médio (quente, ameno, frio) e a umidade média para os próximos dias.
+## ▶️ Como abrir o programa
 
-Internações Médias: Número médio de internações esperadas para os próximos dias.
+Digite no terminal:
 
-Risco Geral: Classificação do risco com base nas condições climáticas (Alto ou Moderado).
+```bash
+python main.py
+```
 
-Classificação das Internações por Doença: Classificação das internações por doenças respiratórias, como bronquiolite, gripe, rinovírus e outros.
+Você verá este menu:
 
-Previsões Detalhadas por Dia: Previsões de internações para cada um dos próximos 5 dias, com explicação do motivo do risco (temperatura e umidade).
+```
+============= MENU DO SISTEMA DE PREVISÃO =============
+1. Ver previsão geral
+2. Ver previsão de um dia específico
+3. Cadastrar novo histórico de internações
+4. Cadastrar paciente
+5. Listar pacientes cadastrados
+6. Sair do sistema
+=======================================================
+```
 
-Estrutura do Código
-Obter Previsão Climática: A função obter_previsao_5_dias busca as previsões de tempo para os próximos 5 dias usando a API do OpenWeatherMap.
+Depois de executar qualquer opção, você poderá escolher se quer voltar ao menu ou sair.
 
-Agrupar Dados por Dia: A função agrupar_por_dia organiza os dados climáticos de cada dia para calcular as médias de temperatura e umidade.
+---
 
-Gerar Dados de Internações: A função gerar_dados_internacoes gera dados fictícios para simular as internações.
+## 🔍 Visão geral das partes do sistema
 
-Ajustar Internações com Base no Clima: A função ajustar_internacoes_por_clima ajusta o número de internações com base na temperatura e umidade.
+```python
+obter_previsao_5_dias()  # Pega a previsão de 5 dias
+agrupar_por_dia()        # Organiza as previsões por data
+prever_internacoes()     # Estima número de internações
+menu()                   # Mostra e executa o menu
+```
 
-Classificação das Internações: A função classificar_internacoes distribui as internações previstas entre as doenças respiratórias.
+---
 
-Gerar Resumo: A função gerar_resumo gera um resumo com base nas previsões de internações e condições climáticas.
+## 📦 Dica: salvar as dependências
 
-Impressão do Relatório: A função imprimir_relatorio exibe o relatório no terminal e salva o arquivo JSON.
+Se quiser compartilhar o projeto com alguém:
 
-Exemplo de Saída
-Ao executar o script, o terminal exibirá algo semelhante a isso:
+```bash
+pip freeze > requirements.txt
+```
 
-yaml
-Copiar
-Editar
-============================================================
-     RESUMO DE INTERNAÇÕES - HOSPITAL SABARÁ (5 DIAS)
-============================================================
+A pessoa que receber pode instalar tudo com:
 
-🌤️ Resumo Climático:
-Clima médio: Ameno (23.5ºC)
-Umidade média: Moderada/baixa (63%)
+```bash
+pip install -r requirements.txt
+```
 
-🏥 Internações médias: 15
-⚠️ Risco Geral: Moderado
+---
 
-🦠 Classificação das Internações por Doença Respiratória:
-Bronquiolite: 5 internações
-Gripe: 4 internações
-Rinovírus: 3 internações
-VSR: 3 internações
+## ❓ Dúvidas comuns
 
-📅 Previsões detalhadas por dia:
+**Preciso saber programar para usar?**
+Não! Basta seguir o passo a passo acima.
 
-📅 Data: 01/05/2025
-🏥 Internações previstas: 16
-⚠️ Risco: Moderado
-🌡️ Motivo: Temp: 22ºC, Umidade: 60%
-—————————————————————————————————————————————
+**Posso usar no Windows?**
+Sim, funciona no Windows, Linux e Mac.
 
-📅 Data: 02/05/2025
-🏥 Internações previstas: 14
-⚠️ Risco: Moderado
-🌡️ Motivo: Temp: 23ºC, Umidade: 65%
-—————————————————————————————————————————————
+**Onde vejo os pacientes que cadastrei?**
+No arquivo `usuarios.json` (abre com qualquer editor de texto).
 
-...
-O arquivo previsao_output.json também será gerado com o seguinte formato:
+---
 
-json
-Copiar
-Editar
-{
-    "previsoes": [
-        {
-            "data": "01/05/2025",
-            "temperatura": 22.0,
-            "umidade": 60,
-            "internacoes_previstas": 16,
-            "risco": "Moderado",
-            "risco_cor": "\u001b[32m",
-            "motivo": "Temp: 22ºC, Umidade: 60%"
-        },
-        {
-            "data": "02/05/2025",
-            "temperatura": 23.0,
-            "umidade": 65,
-            "internacoes_previstas": 14,
-            "risco": "Moderado",
-            "risco_cor": "\u001b[32m",
-            "motivo": "Temp: 23ºC, Umidade: 65%"
-        }
-    ],
-    "resumo": {
-        "clima_resumo": "Ameno",
-        "umidade_resumo": "Moderada/baixa",
-        "media_temperatura": 23.5,
-        "media_umidade": 63,
-        "media_internacoes": 15,
-        "risco_geral": "Moderado",
-        "classificacao_internacoes": {
-            "bronquiolite": 5,
-            "gripe": 4,
-            "rinovírus": 3,
-            "VSR": 3
-        }
-    }
-}
-Contribuições
-Se você deseja contribuir para este projeto, fique à vontade para fazer um fork e enviar pull requests. Qualquer sugestão de melhorias ou correções é bem-vinda!
+## 🛡️ Licença
+
+Este projeto é acadêmico, sem fins lucrativos. MIT © 2025
